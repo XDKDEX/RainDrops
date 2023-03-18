@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <!-- <script src="./min.js"></script> -->
+    <link rel="stylesheet" href="./rain.min.css">
+    <script src="./rain.js"></script>
+
+    <!-- <script src="./jquery-3.6.4.js"></script> -->
+    <!-- <script src="./debug.js"></script> -->
+</head>
+
+<body>
+    <script>
+        // ajax({type:'GET',url:'./test1.json',success:"doc('button',0).innerText = (JSON.parse('&response').data)"});
+        // ajax({type:'GET',url:'./test1.json',success:"console.log('&response')"});
+        // doc("document").ready(()=>{console.log("test");});
+    </script>
+    <button id="button" class="button a v c">
+        <a>测试</a>
+    </button>
+
+    <button id="button" class="button">
+        <a>测试</a>
+    </button>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>a
+</body>
+<script>
+    doc("#button",0).click(()=>{ffuunc()});
+    doc("#button",1).click(()=>{ffuunc()});
+    function ffuunc() {
+        let doc;
+        doc = document.createElement("span");
+        doc.className = "wave";
+        doc.style.left = (window.event.layerX - 5) + "px";
+        doc.style.top = (window.event.layerY - 5) + "px";
+        doc1 = window.event.target;
+        doc1.appendChild(doc);
+        doc.addEventListener("animationend", () => {
+            // doc.removeChild(event.target)
+            event.target.outerHTML = '';
+        })
+
+    }
+
+// document.getElementsByClassName('button')[0].addEventListener("click",()=>{ffuunc()})
+
+// animated.addEventListener('animationend', () => {
+//     console.log('Animation ended');
+//   });
+</script>
