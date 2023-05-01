@@ -1,13 +1,11 @@
-/* RainDrops */"use strict";
+"use strict";
 
-var scrollRsate = (a) => {
-    let doc;
-    if (a == "document") {
-        doc = document.documentElement;
-    } else {
-        doc = document.getElementsByClassName(a)[0];
+function scrollRsate(a) {
+    if(a.nodeName == "BODY"){
+        return [(document.documentElement.scrollTop / (a.scrollHeight - a.clientHeight) * 100), (document.documentElement.scrollLeft / (a.scrollWidth - a.clientLeft) * 100)];
+    }else{
+        return [(a.scrollTop / (a.scrollHeight - a.clientHeight) * 100), (a.scrollLeft / (a.scrollWidth - a.clientLeft) * 100)];
     }
-    return [(doc.scrollTop / (doc.scrollHeight - doc.clientHeight) * 100), (doc.scrollLeft / (doc.scrollWidth - doc.clientLeft) * 100)];
 };
 
 var ajaxSetting = {
@@ -16,10 +14,9 @@ var ajaxSetting = {
     }, "Zip": false
 };
 /* setup */
-ajaxSetting.Request();
-
-/* ajaxSetting.Zip(false); */
-var ajax = (data) => {
+// ajaxSetting.Request();
+ajaxSetting.Zip = true;
+function ajax(data) {
     var xmlhttp = ajaxSetting.Request();
     xmlhttp.open("GET", data.url, false);
     xmlhttp.send();
@@ -29,46 +26,66 @@ var ajax = (data) => {
     }(data.success, xmlhttp.response);
 };
 
-function doc(data, mumber) {
-    let a;
-    if(data== 'document'){
-        a = document.body;
-    }else{
-        a = document.querySelectorAll(data)[mumber];
-    }
 
-    docEvent(a, 'reg');
-    return a;
-};
 
-function docEvent(a, mode){
-    if (mode == 'reg') {
-        /* JS */
-        a.click = (b) => { a.addEventListener('click', b); };
-        a.dblclick = (b) => { a.addEventListener('dblclick', b); };
-        a.scroll = (b) => { if (a.nodeName == 'BODY') { window.addEventListener('scroll', b); } else { a.addEventListener('scroll', b); }; };
-        a.ready = (b) => { if (a.nodeName == 'BODY') { window.addEventListener('load', b); } else { a.addEventListener("load", b); }; };
 
-        /* CSS */
-        a.height = function(){return a.style.clientHeight;};
 
-        a.hide = () => { a.style.display = 'none'; };
-        a.show = () => { a.style.display = ''; };
-    } else if (mode == 'del') {
-        let object = Object.keys(a);
-        for (let count = 0; object.length != count; count++) {
-            delete a[object[count]];
+const docu = {
+    "cookie": (a, ...z) => {
+        // let r = document.cookie.split(';');
+        let r = Object.keys(a)
+        for (let count = 0; r.length != count; count++) {
+            document.cookie = r[count] + '=' + a[r[count]]
         }
-        return true;
     }
-    setTimeout(() => {
-        docEvent(a, 'del');
-    }, 1);
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function query(data) {
+    let a;
+    a = document.querySelectorAll(data);
+
+    for(let count=0;a.length!=count;count++){
+        queryEvent(a[count]);
+    }
+
+    return a[0]||a[1],a;
 };
 
-var test = (aaa) => {
-    console.log(!this.aaa);
+
+function queryEvent(a) {
+        /* JS */
+        a.click = function (b) { a.addEventListener('click', b); };
+        a.dblclick = function (b) { a.addEventListener('dblclick', b); };
+        a.scroll = function (b) { if (a.nodeName == 'BODY') { window.addEventListener('scroll', b); } else { a.addEventListener('scroll', b); }; };
+        /*a.interval = (b,c) =>{setInterval(b,c);} */
+        a.ready = function (b) { if (a.nodeName == 'BODY') { window.addEventListener('load', b); } else { a.addEventListener("load", b); }; };
+        a.load = function (b) {let r = ajaxSetting.Request();r.open("GET", b, false);r.send();r.onreadystatechange = function (t, e){t.innerHTML = e;}(a, r.response);};
+        /* CSS */
+        a.hide = function () { a.style.display = 'none'; };
+        a.show = function () { a.style.display = ''; };
 };
-console.log("\n %c RainDropJS v1  %c http://aplayer.js.org \n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;")
+
+
+
+
+// function queryApp(){
+
+// }
+
+
+console.log("\n %c RainDropJS dev  %c https://github.com/XDKDEX/RainDrops \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0;")
